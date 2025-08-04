@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { validationSchema } from './config/validation.schema';
 import { AppConfig } from './config/app-config.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { throttleConfig } from './config/throttle-config';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -26,8 +29,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
       inject: [ConfigService],
     }),
+    ThrottlerModule.forRoot(throttleConfig),
   ],
   controllers: [AppController, AppConfig],
-  providers: [AppService, AppConfig],
+  providers: [
+    AppService,
+    AppConfig,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
