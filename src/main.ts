@@ -3,15 +3,31 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
+import { DataSource } from 'typeorm';
+import { testDatabaseConnection } from './common/test-database-connection';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableShutdownHooks();
 
-  //get config Servcie
+  //get config Servcie and database connection
   const configService = app.get(ConfigService);
+  const dataSource = app.get(DataSource);
+
+  // Test database connection
+  await testDatabaseConnection(dataSource, configService);
 
   app.enableCors();
   app.use(helmet());
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   //swagger config
   const config = new DocumentBuilder()
@@ -32,4 +48,6 @@ async function bootstrap() {
     `📚 API Documentation available at: http://localhost:${port}/api`,
   );
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('🔥 Error starting the application', err);
+});
