@@ -31,10 +31,15 @@ export class Identity extends BaseEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   identifier: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  password_hash: string | null;
+  @Column({
+    name: 'password_hash',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
+  passwordHash: string | null;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ name: 'is_verified', type: 'boolean', default: false })
   isVerified: boolean;
 
   @OneToMany(() => Otp, (otp) => otp.identity)

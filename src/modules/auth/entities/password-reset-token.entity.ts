@@ -13,21 +13,27 @@ export class PasswordResetToken extends BaseEntity {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column({ type: 'varchar', length: 255, unique: true, nullable: false })
-  token_hash: string;
+  @Column({
+    name: 'token_hash',
+    type: 'varchar',
+    length: 255,
+    unique: true,
+    nullable: false,
+  })
+  tokenHash: string;
 
-  @Column({ type: 'timestamp', nullable: false })
-  expires_at: Date;
+  @Column({ name: 'expires_at', type: 'timestamp', nullable: false })
+  expiresAt: Date;
 
-  @Column({ type: 'boolean', default: false, nullable: false })
-  is_used: boolean;
+  @Column({ name: 'is_used', type: 'boolean', default: false, nullable: false })
+  isUsed: boolean;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ name: 'used_at', type: 'timestamp', nullable: true })
   usedAt: Date | null;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ name: 'ip_address', type: 'varchar', length: 255, nullable: true })
   ipAddress: string | null;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ name: 'user_agent', type: 'text', nullable: true })
   userAgent: string | null;
 }

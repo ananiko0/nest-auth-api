@@ -21,15 +21,20 @@ export class Otp extends BaseEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   identifier: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
-  otp_hash: string;
+  @Column({ name: 'otp_hash', type: 'varchar', length: 255, nullable: false })
+  otpHash: string;
 
   @Column({ type: 'enum', enum: OtpTypeEnum, nullable: false })
   type: OtpTypeEnum;
 
-  @Column({ type: 'timestamptz', nullable: true, default: null })
-  used_at: Date;
+  @Column({
+    name: 'used_at',
+    type: 'timestamptz',
+    nullable: true,
+    default: null,
+  })
+  usedAt: Date;
 
-  @Column({ type: 'timestamptz', nullable: false })
-  expires_at: Date;
+  @Column({ name: 'expires_at', type: 'timestamptz', nullable: false })
+  expiresAt: Date;
 }

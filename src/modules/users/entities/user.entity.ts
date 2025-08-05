@@ -1,11 +1,9 @@
 import { Entity, Column, OneToMany } from 'typeorm';
-import { BaseEntity } from '../../../common/entities/base.entity';
 import { Identity } from 'src/modules/auth/entities/identity.entity';
 import { RefreshToken } from 'src/modules/auth/entities/refresh-token.entity';
 import { PasswordResetToken } from 'src/modules/auth/entities/password-reset-token.entity';
 import { UserRole } from '../types/user-role.enum';
-
-// I dont like naming same are camelCase and some are snake case
+import { BaseEntity } from '@common/entities/base.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -15,11 +13,11 @@ export class User extends BaseEntity {
   @Column({ type: 'varchar', length: 20, unique: true, nullable: true })
   phone: string | null;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  first_name: string | null;
+  @Column({ name: 'first_name', type: 'varchar', length: 100, nullable: true })
+  firstName: string | null;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  last_name: string | null;
+  @Column({ name: 'last_name', type: 'varchar', length: 100, nullable: true })
+  lastName: string | null;
 
   @Column({
     type: 'enum',
@@ -29,13 +27,10 @@ export class User extends BaseEntity {
   })
   role: UserRole;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  refresh_token_hash: string | null;
-
-  @Column({ type: 'boolean', default: true })
+  @Column({ name: 'is_active', type: 'boolean', default: true })
   isActive: boolean;
 
-  @Column({ type: 'timestamptz', nullable: true })
+  @Column({ name: 'last_login_at', type: 'timestamptz', nullable: true })
   lastLoginAt: Date | null;
 
   @OneToMany(() => Identity, (identity) => identity.user)
