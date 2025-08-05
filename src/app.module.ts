@@ -8,6 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { throttleConfig } from './config/throttle-config';
 import { APP_GUARD } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { APP_GUARD } from '@nestjs/core';
       inject: [ConfigService],
     }),
     ThrottlerModule.forRoot(throttleConfig),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController, AppConfig],
   providers: [
