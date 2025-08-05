@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 import { DataSource } from 'typeorm';
-import { testDatabaseConnection } from './common/test-database-connection';
+import { testDatabaseConnection } from './common/utils/test-database-connection.util';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
