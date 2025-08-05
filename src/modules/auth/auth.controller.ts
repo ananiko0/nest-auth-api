@@ -12,7 +12,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({ summary: 'check if email identifier is available' })
-  @ApiResponse({ status: 200, description: 'Identifier is available' })
+  @ApiResponse({ status: 201, description: 'Identifier is available' })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
   @ApiResponse({ status: 409, description: 'Identifier already exists' })
   @Post('check-identifier/email')
@@ -21,7 +21,7 @@ export class AuthController {
   }
 
   @ApiOperation({ summary: 'Check if phone identifier is available' })
-  @ApiResponse({ status: 200, description: 'Identifier is available' })
+  @ApiResponse({ status: 201, description: 'Identifier is available' })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
   @ApiResponse({ status: 409, description: 'Identifier already exists' })
   @Post('check-identifier/phone')
