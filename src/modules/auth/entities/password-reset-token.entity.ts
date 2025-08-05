@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
-import { User } from 'src/modules/users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity('password_reset_tokens')
 export class PasswordResetToken extends BaseEntity {

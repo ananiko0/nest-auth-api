@@ -1,7 +1,7 @@
 import { BaseEntity } from '../../../common/entities/base.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
-import { Identity } from './identity.entity';
 import { IdentifierTypeEnum } from '../types/identifier.enum';
+import { Identity } from './identity.entity';
 import { OtpTypeEnum } from '../types/otp.enum';
 
 @Entity('otp')

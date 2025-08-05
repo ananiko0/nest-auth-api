@@ -1,9 +1,9 @@
 import { Entity, Column, OneToMany } from 'typeorm';
-import { Identity } from 'src/modules/auth/entities/identity.entity';
-import { RefreshToken } from 'src/modules/auth/entities/refresh-token.entity';
-import { PasswordResetToken } from 'src/modules/auth/entities/password-reset-token.entity';
+import { BaseEntity } from '../../../common/entities/base.entity';
+import { Identity } from '../../auth/entities/identity.entity';
+import { RefreshToken } from '../../auth/entities/refresh-token.entity';
+import { PasswordResetToken } from '../../auth/entities/password-reset-token.entity';
 import { UserRole } from '../types/user-role.enum';
-import { BaseEntity } from '@common/entities/base.entity';
 
 @Entity('users')
 export class User extends BaseEntity {

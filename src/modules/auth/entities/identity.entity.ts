@@ -8,9 +8,9 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
+import { IdentifierTypeEnum } from '../types/identifier.enum';
 import { Otp } from './otp.entity';
 import { RefreshToken } from './refresh-token.entity';
-import { IdentifierTypeEnum } from '../types/identifier.enum';
 
 //something should probably be updated about the way i keep password
 // i don't like provider_id name and in some codes i call it identifier
