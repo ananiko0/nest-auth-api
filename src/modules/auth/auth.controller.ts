@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import {
   EmailIdentifierCheckDto,
   PhoneIdentifierCheckDto,
-} from './dto/request/checkidentifier.dot';
+} from './dto/request/checkidentifier.dto';
 
 @ApiTags('Authentification')
 @Controller('auth')
