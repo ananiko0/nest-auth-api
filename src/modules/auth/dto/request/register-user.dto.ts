@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsEmail,
-  IsString,
-  MinLength,
-  IsEnum,
-  IsMobilePhone,
-} from 'class-validator';
+import { IsEmail, IsString, MinLength, IsEnum, IsMobilePhone } from 'class-validator';
 import { UserRole } from 'src/modules/users/types/user-role.enum';
 
 //later password should have more requirements

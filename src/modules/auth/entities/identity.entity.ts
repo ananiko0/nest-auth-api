@@ -1,13 +1,6 @@
 import { BaseEntity } from '../../../common/entities/base.entity';
 import { User } from '../../users/entities/user.entity';
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { IdentifierTypeEnum } from '../types/identifier.enum';
 import { Otp } from './otp.entity';
 import { RefreshToken } from './refresh-token.entity';
@@ -21,7 +14,7 @@ export class Identity extends BaseEntity {
   @Column({ type: 'uuid', name: 'user_id', nullable: false })
   userId: string;
 
-  @ManyToOne(() => User, (user) => user.identities, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, user => user.identities, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
@@ -31,20 +24,15 @@ export class Identity extends BaseEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   identifier: string;
 
-  @Column({
-    name: 'password_hash',
-    type: 'varchar',
-    length: 255,
-    nullable: true,
-  })
-  passwordHash: string | null;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  password_hash: string | null;
 
-  @Column({ name: 'is_verified', type: 'boolean', default: false })
+  @Column({ type: 'boolean', default: false })
   isVerified: boolean;
 
-  @OneToMany(() => Otp, (otp) => otp.identity)
+  @OneToMany(() => Otp, otp => otp.identity)
   otps: Otp[];
 
-  @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.identity)
+  @OneToMany(() => RefreshToken, refreshToken => refreshToken.identity)
   refreshTokens: RefreshToken[];
 }

@@ -9,9 +9,7 @@ export class Otp extends BaseEntity {
   @Column({ type: 'uuid', name: 'identity_id', nullable: false })
   identityId: string;
 
-  @ManyToOne(() => Identity, (identity) => identity.otps, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => Identity, identity => identity.otps, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'identity_id' })
   identity: Identity;
 
@@ -21,20 +19,15 @@ export class Otp extends BaseEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   identifier: string;
 
-  @Column({ name: 'otp_hash', type: 'varchar', length: 255, nullable: false })
-  otpHash: string;
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  otp_hash: string;
 
   @Column({ type: 'enum', enum: OtpTypeEnum, nullable: false })
   type: OtpTypeEnum;
 
-  @Column({
-    name: 'used_at',
-    type: 'timestamptz',
-    nullable: true,
-    default: null,
-  })
-  usedAt: Date;
+  @Column({ type: 'timestamptz', nullable: true, default: null })
+  used_at: Date;
 
-  @Column({ name: 'expires_at', type: 'timestamptz', nullable: false })
-  expiresAt: Date;
+  @Column({ type: 'timestamptz', nullable: false })
+  expires_at: Date;
 }

@@ -5,6 +5,8 @@ import { RefreshToken } from '../../auth/entities/refresh-token.entity';
 import { PasswordResetToken } from '../../auth/entities/password-reset-token.entity';
 import { UserRole } from '../types/user-role.enum';
 
+// I dont like naming same are camelCase and some are snake case
+
 @Entity('users')
 export class User extends BaseEntity {
   @Column({ type: 'varchar', length: 255, unique: true, nullable: true })
@@ -13,11 +15,11 @@ export class User extends BaseEntity {
   @Column({ type: 'varchar', length: 20, unique: true, nullable: true })
   phone: string | null;
 
-  @Column({ name: 'first_name', type: 'varchar', length: 100, nullable: true })
-  firstName: string | null;
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  first_name: string | null;
 
-  @Column({ name: 'last_name', type: 'varchar', length: 100, nullable: true })
-  lastName: string | null;
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  last_name: string | null;
 
   @Column({
     type: 'enum',
@@ -27,18 +29,21 @@ export class User extends BaseEntity {
   })
   role: UserRole;
 
-  @Column({ name: 'is_active', type: 'boolean', default: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  refresh_token_hash: string | null;
+
+  @Column({ type: 'boolean', default: true })
   isActive: boolean;
 
-  @Column({ name: 'last_login_at', type: 'timestamptz', nullable: true })
+  @Column({ type: 'timestamptz', nullable: true })
   lastLoginAt: Date | null;
 
-  @OneToMany(() => Identity, (identity) => identity.user)
+  @OneToMany(() => Identity, identity => identity.user)
   identities: Identity[];
 
-  @OneToMany(() => RefreshToken, (token) => token.user)
+  @OneToMany(() => RefreshToken, token => token.user)
   refreshTokens: RefreshToken[];
 
-  @OneToMany(() => PasswordResetToken, (token) => token.user)
+  @OneToMany(() => PasswordResetToken, token => token.user)
   passwordResetTokens: PasswordResetToken[];
 }

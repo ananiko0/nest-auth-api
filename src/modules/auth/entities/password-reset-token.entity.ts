@@ -7,33 +7,25 @@ export class PasswordResetToken extends BaseEntity {
   @Column({ type: 'uuid', name: 'user_id', nullable: false })
   userId: string;
 
-  @ManyToOne(() => User, (user) => user.passwordResetTokens, {
-    onDelete: 'CASCADE',
-  })
+  @ManyToOne(() => User, user => user.passwordResetTokens, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column({
-    name: 'token_hash',
-    type: 'varchar',
-    length: 255,
-    unique: true,
-    nullable: false,
-  })
-  tokenHash: string;
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: false })
+  token_hash: string;
 
-  @Column({ name: 'expires_at', type: 'timestamp', nullable: false })
-  expiresAt: Date;
+  @Column({ type: 'timestamp', nullable: false })
+  expires_at: Date;
 
-  @Column({ name: 'is_used', type: 'boolean', default: false, nullable: false })
-  isUsed: boolean;
+  @Column({ type: 'boolean', default: false, nullable: false })
+  is_used: boolean;
 
-  @Column({ name: 'used_at', type: 'timestamp', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   usedAt: Date | null;
 
-  @Column({ name: 'ip_address', type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   ipAddress: string | null;
 
-  @Column({ name: 'user_agent', type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: true })
   userAgent: string | null;
 }
