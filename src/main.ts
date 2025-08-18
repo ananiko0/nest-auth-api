@@ -1,5 +1,8 @@
 import './polyfills';
 
+console.log('DB_HOST from env:', process.env.DB_HOST);
+console.log('JWT_SECRET from env:', process.env.JWT_SECRET);
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -15,6 +18,8 @@ async function bootstrap() {
 
   //get config Servcie and database connection
   const configService = app.get(ConfigService);
+
+  console.log('port', configService.get<number>('PORT', 3000));
   const dataSource = app.get(DataSource);
 
   // Test database connection
