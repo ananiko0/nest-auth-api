@@ -15,7 +15,7 @@ import { UsersModule } from './modules/users/users.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema,
+      // validationSchema,
       envFilePath: process.env.NODE_ENV === 'production' ? undefined : '.env',
     }),
     TypeOrmModule.forRootAsync({
